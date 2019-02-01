@@ -72,62 +72,87 @@ int i, count;
 float dxdt, dydt, t, x, y, dt, r, K, b, c, d;
 
 void setup(){
-// Initial Settings
-size(500,500);
-colorMode(RGB,100,100,100);
-strokeWeight(5);
-background(100,100,100);
-line(0,400,500,400);
-line(100,0,100,500);
+  // Initial Settings
+  size(500,500);
+  colorMode(RGB,100,100,100);
+  strokeWeight(5);
+  background(100,100,100);
+  line(0,400,500,400);
+  line(100,0,100,500);
 
-// Assigning the variables
-t = 0.0;
-x = 100.0;
-y = 100.0;
+  // Assigning the variables
+  t = 0.0;
+  x = 100.0;
+  y = 100.0;
 
-K = 5000;
-r = 12;
-b = 0.01;
-c = 5;
-d = 0.01;
+  K = 5000;
+  r = 12;
+  b = 0.01;
+  c = 5;
+  d = 0.01;
 
-dt = 0.01;
+  dt = 0.01;
 
-// Printing the UI
-textSize(10);
-fill(30);
+  // Printing the UI
+  textSize(10);
+  fill(30);
 
-text("K = ", 10, 20);
-text("r = ", 10, 40);
-text("b = ", 10, 60);
-text("c = ", 10, 80);
-text("d = ", 10, 100);
-text("x = ", 10, 120);
-text("y = ", 10, 140);
+  text("K = ", 10, 20);
+  text("r = ", 10, 40);
+  text("b = ", 10, 60);
+  text("c = ", 10, 80);
+  text("d = ", 10, 100);
+  text("x = ", 10, 120);
+  text("y = ", 10, 140);
 
-text(K, 30, 20);
-text(r, 30, 40);
-text(b, 30, 60);
-text(c, 30, 80);
-text(d, 30, 100);
-text(x, 30, 120);
-text(y, 30, 140);
-
-PGM();
+  text(K, 30, 20);
+  text(r, 30, 40);
+  text(b, 30, 60);
+  text(c, 30, 80);
+  text(d, 30, 100);
+  text(x, 30, 120);
+  text(y, 30, 140);
+  PGM();
 }
 
 void PGM(){
-// Settings
-strokeWeight(1);
-fill(80,80,80);
-translate(100,400);
+  // Settings
+  strokeWeight(1);
+  fill(80,80,80);
+  translate(100,400);
 
-// Main PGM
-for(i=0; i < 1000; i++){ fill(30,80,30); ellipse(x*0.1, -y*0.1, 5, 5); fill(80,30,30); ellipse(50*t,
-  -x*0.1, 5, 5); fill(30,30,80); ellipse(50*t, -y*0.1, 5, 5); dxdt=r*x*(1-x/K) - b*x*y; dydt=-c*y + d*x*y; if(x < 1){ x=0;
-  }else{ x=x + dxdt * dt; } if(y < 1){ y=0; }else{ y=y + dydt * dt; } t=t + dt; } } void draw(){}; void keyPressed() {
-  if(key=='p' || key=='P' ) { String path=System.getProperty("user.home") + "/Desktop/screenshot" + count + ".jpg" ;
-  save(path); count++; println("screen saved." + path); } }
+  // Main PGM
+  for(i=0; i < 1000; i++){
+    fill(30,80,30); 
+    ellipse(x*0.1, -y*0.1, 5, 5); 
+    fill(80,30,30); 
+    ellipse(50*t,-x*0.1, 5, 5); 
+    fill(30,30,80);
+    ellipse(50*t, -y*0.1, 5, 5); 
+    dxdt=r*x*(1-x/K) - b*x*y; 
+    dydt=-c*y + d*x*y; 
+    if(x < 1){
+      x=0;
+    }else{ 
+      x=x + dxdt * dt; 
+    } if(y < 1){ 
+      y=0; 
+    }else{ 
+      y=y + dydt * dt; 
+    } 
+    t=t + dt; 
+  } 
+} 
+
+void draw(){}; 
+void keyPressed() {
+  if(key=='p' || key=='P' ) { 
+    String path=System.getProperty("user.home") + "/Desktop/screenshot" + count + ".jpg" ;
+    save(path); 
+    count++; 
+    println("screen saved." + path); 
+  } 
+}
 </textarea><br>
   </div>
 </body>

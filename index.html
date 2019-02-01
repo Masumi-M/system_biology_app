@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <!-- For Responsive Design -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <title>System Biology App</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="Semantic-UI-CSS-master/semantic.min.css">
+  <style>
+    body {
+      text-align: center;
+      margin-left: auto;
+      margin-right: right;
+    }
+
+    body .ui.center.aligned {
+      margin-top: 2rem !important;
+      margin-bottom: 2rem !important;
+    }
+
+    #canvas0 {
+      border: solid 0.1rem grey;
+      text-align: center;
+      margin-left: auto;
+      margin-right: right;
+    }
+  </style>
+
+  <!-- JS -->
+  <script src="processing.min.js"></script>
+  <script>
+    var Pjs = new Array(1);
+
+    window.onload = function () {
+      run(0);
+    }
+
+    function stop(num) {
+      if (Pjs[num]) Pjs[num].exit();
+    }
+
+    function run(num) {
+      stop(num);
+      var canvas = document.getElementById('canvas' + String(num));
+      var code = document.getElementsByName('source_code')[0].value;
+      try {
+        Pjs[num] = new Processing(canvas, code);
+      } catch (e) {
+        alert(e);
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1 class="ui aligned center">System Biology App</h1>
+  <canvas id="canvas0"></canvas>
+
+  <div class="ui aligned center">
+    <button class="ui button blue" onclick="run(0)">Run</button>
+    <button class="ui button red" onclick="stop(0)">Stop</button>
+  </div>
+
+  <div>
+    <textarea id="editor" rows=25 cols=50 name="source_code">
+// Defining the variables
+int i, count;
+float dxdt, dydt, t, x, y, dt, r, K, b, c, d;
+
+void setup(){
+// Initial Settings
+size(500,500);
+colorMode(RGB,100,100,100);
+strokeWeight(5);
+background(100,100,100);
+line(0,400,500,400);
+line(100,0,100,500);
+
+// Assigning the variables
+t = 0.0;
+x = 100.0;
+y = 100.0;
+
+K = 5000;
+r = 12;
+b = 0.01;
+c = 5;
+d = 0.01;
+
+dt = 0.01;
+
+// Printing the UI
+textSize(10);
+fill(30);
+
+text("K = ", 10, 20);
+text("r = ", 10, 40);
+text("b = ", 10, 60);
+text("c = ", 10, 80);
+text("d = ", 10, 100);
+text("x = ", 10, 120);
+text("y = ", 10, 140);
+
+text(K, 30, 20);
+text(r, 30, 40);
+text(b, 30, 60);
+text(c, 30, 80);
+text(d, 30, 100);
+text(x, 30, 120);
+text(y, 30, 140);
+
+PGM();
+}
+
+void PGM(){
+// Settings
+strokeWeight(1);
+fill(80,80,80);
+translate(100,400);
+
+// Main PGM
+for(i=0; i < 1000; i++){ fill(30,80,30); ellipse(x*0.1, -y*0.1, 5, 5); fill(80,30,30); ellipse(50*t,
+  -x*0.1, 5, 5); fill(30,30,80); ellipse(50*t, -y*0.1, 5, 5); dxdt=r*x*(1-x/K) - b*x*y; dydt=-c*y + d*x*y; if(x < 1){ x=0;
+  }else{ x=x + dxdt * dt; } if(y < 1){ y=0; }else{ y=y + dydt * dt; } t=t + dt; } } void draw(){}; void keyPressed() {
+  if(key=='p' || key=='P' ) { String path=System.getProperty("user.home") + "/Desktop/screenshot" + count + ".jpg" ;
+  save(path); count++; println("screen saved." + path); } }
+</textarea><br>
+  </div>
+</body>
+
+</html>

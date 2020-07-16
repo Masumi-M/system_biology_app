@@ -10,6 +10,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="Semantic-UI-CSS-master/semantic.min.css">
+  <link rel="stylesheet" href="/google-code-prettify/prettify.css" type="text/css">
   <style>
     body {
       text-align: center;
@@ -32,6 +33,12 @@
 
   <!-- JS -->
   <script src="processing.min.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="/google-code-prettify/prettify.js"></script>
+  <script src="/google-code-prettify/lang-css.js"></script>
+  <script>
+    prettyPrint();
+  </script>
   <script>
     var Pjs = new Array(1);
 
@@ -66,7 +73,8 @@
   </div>
 
   <div>
-    <textarea id="editor" rows=25 cols=50 name="source_code">
+    <div class="module_code">▼ HTML</div>
+    <textarea class="prettyprint" id="editor" rows=25 cols=50 name="source_code">
 // Defining the variables
 int i, count;
 float dxdt, dydt, t, x, y, dt, r, K, b, c, d;
@@ -153,7 +161,8 @@ void keyPressed() {
     println("screen saved." + path); 
   } 
 }
-</textarea><br>
+    </textarea>
+    <br>
   </div>
 </body>
 
